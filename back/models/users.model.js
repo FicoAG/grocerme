@@ -19,16 +19,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  role: {
-    type: String,
-    enum: ['host', 'regular'],
-    required: false,
-    default: 'regular'
+
+  coordinates: {
+
   },
-  birthDate: {
-    type: Number,
-    required: false
+
+  address: {
+
   },
+
+  vendors: [
+    
+  ]
+  ,
   createdAt: {
     type: Number,
     default: Date.now() // Get a timestamp :)

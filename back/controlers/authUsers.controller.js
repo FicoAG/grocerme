@@ -3,18 +3,17 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports = {
-  signup,
-  login
+  signupUser,
+  loginUser
 }
 
-function signup (req, res) {
+function signupUser (req, res) {
   const hashedPwd = bcrypt.hashSync(req.body.user_password, 10)
   const userBody = {
     name: req.body.user_name,
     email: req.body.user_email,
     password: hashedPwd
   }
-
   UserModel
     .create(userBody)
     .then(() => {
@@ -33,7 +32,7 @@ function signup (req, res) {
     })
 }
 
-function login (req, res) {
+function loginUser (req, res) {
   UserModel
     .findOne({ email: req.body.user_email })
     .then(user => {

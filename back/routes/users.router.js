@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const { me, authenticated} = require('../services/authenticate');
 
 const {
   getAllUsers,
@@ -7,9 +8,10 @@ const {
   updateUser
 } = require('../controlers/users.controller')
 
-router.get('/', getAllUsers)
-router.get('/:id', getUserById)
-router.delete('/:id', deleteUserById)
-router.put('/:id', updateUser)
+router.get('/', authenticated,   getAllUsers)
+router.get('/:id/orders', authenticated,  me,   getUserById)
+router.get('/:id', authenticated,  me,   getUserById)
+router.delete('/:id',authenticated, me, deleteUserById)
+router.put('/:id', authenticated,  me,     updateUser)
 
 module.exports = router
