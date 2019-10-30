@@ -12,6 +12,8 @@ document.getElementById('user-btn-signup').addEventListener('click', (event) => 
       localStorage.setItem("name",  response.data.name);
       localStorage.setItem("email", response.data.email);
     })
+    // .then() redirigir a nuevo forumlario para terminar de completar info del usuario
+    // y una vez finalizado ir al home filtrado por el código postal del usuario.
     .catch(function (error) {
       console.log(error.response);
     });

@@ -12,6 +12,8 @@ document.getElementById('vendor-btn-signup').addEventListener('click', (event) =
       localStorage.setItem("name", response.data.name);
       localStorage.setItem("email", response.data.email);
     })
+    //then redirigir a completar resto de info del perfil
+    //then redirigr a panel de control.
     .catch(function (error) {
       console.log(error.response);
     });

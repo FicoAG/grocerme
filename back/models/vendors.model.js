@@ -21,7 +21,11 @@ const vendorSchema = new mongoose.Schema({
     },
     category : {
         type : String, 
-        enum: ["congelados", "pan", "fruta", "verdura", "agua"]
+        enum: ["frosted", "bakery", "fruits & vegetables", "water"]
+    },
+
+    brand: {
+        type: String,
     },
     mon: {
         zone : [{

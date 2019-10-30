@@ -64,8 +64,7 @@ function getVendorsPostal(req, res) {
                 }
                 results[filtrado.category].push(filtrado);
             })
-            // return res.json(results)
-            return res.json(Object.getOwnPropertyNames(results).sort())
+            return res.json(results)
         })
         .catch((err) => handdleError(err, res))
 }
