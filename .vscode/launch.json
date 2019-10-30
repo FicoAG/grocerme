@@ -8,10 +8,12 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Backend",
+            "runtimeExecutable": "nodemon",
             "program": "${workspaceFolder}/back/index.js",
-            "env": {
-                "NODE_ENV": "development"
-            }
+            "restart": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "env": { "NODE_ENV": "development" }
         }
     ]
 }

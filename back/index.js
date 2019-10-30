@@ -1,3 +1,5 @@
+process.stdout.write('\033c');
+
 const cors = require('cors')
 const express = require('express')
 const mongoose = require('mongoose')
@@ -20,14 +22,11 @@ app.use(express.json())
 
 
 // NONGOOSE
-mongoose.connect(config.mongoURL + config.mongoDBName, {
-  useNewUrlParser: true
-}, (err) => {
-  if (err) {
-    throw new Error(err)
-  }
-  console.info('💾 Mongoose is connected')
-})
+mongoose.connect(
+  config.mongoURL + config.mongoDBName, 
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+  err => { if (err) { throw new Error(err) } console.info('💾  Mongoose is connected') }
+)
 
 // ROUTING
 const apiRouter = require('./routes')
