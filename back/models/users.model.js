@@ -19,21 +19,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-
-  coordinates: {
-
-  },
-
   address: {
-
+    type: String
   },
-
-  vendors: [
-    
-  ]
-  ,
+  zipcode: {
+    type: String
+  },
+  vendors: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'vendor'
+  }],
   createdAt: {
-    type: Number,
+    type: Date,
     default: Date.now() // Get a timestamp :)
   }
 })

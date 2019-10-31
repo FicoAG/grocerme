@@ -3,79 +3,78 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports = {
-    signupVendor,
-    loginVendor
+  signupVendor,
+  loginVendor
 }
 
-function signupVendor(req, res) {
-    const hashedPwd = bcrypt.hashSync(req.body.vendor_password, 10)
-    const vendorBody = {
-        name: req.body.vendor_name,
+function signupVendor (req, res) {
+  const hashedPwd = bcrypt.hashSync(req.body.vendor_password, 10)
+  const vendorBody = {
+    name: req.body.vendor_name,
+    email: req.body.vendor_email,
+    password: hashedPwd
+  }
+
+  VendorModel
+    .create(vendorBody)
+    .then(() => {
+      const vendorData = {
+        vendorname: req.body.vendor_name,
         email: req.body.vendor_email,
-        password: hashedPwd
-    }
+        isVendor: true
+      }
 
-    VendorModel
-        .create(vendorBody)
-        .then(() => {
-            const vendorData = {vendorname: req.body.vendor_name, email: req.body.vendor_email}
+      const token = jwt.sign(
+        vendorData,
+        'secret', // TODO SECRET MORE SECRET PLEASE
+        { expiresIn: '1w' }
+      )
 
-            const token = jwt.sign(
-                vendorData,
-                'secret', // TODO SECRET MORE SECRET PLEASE
-                { expiresIn: '1w'}
-            )
-
-            return res.json({token: token,...vendorData})
-        })
-        .catch((err) => {
-            res.status(403).json({
-                error: err
-            })
-        })
+      return res.json({ token: token, ...vendorData })
+    })
+    .catch((err) => {
+      res.status(403).json({
+        error: err
+      })
+    })
 }
 
-function loginVendor(req, res) {
-    VendorModel
-        .findOne({
-            email: req.body.vendor_email
+function loginVendor (req, res) {
+  VendorModel
+    .findOne({ email: req.body.vendor_email })
+    .then(vendor => {
+      if (!vendor) { return res.json({ error: 'wrong email' }) }
+
+      bcrypt.compare(req.body.vendor_password, vendor.password, (err, result) => {
+        if (err) { throw new Error(err) }
+
+        if (!result) {
+          return res.json({ error: `wrong password for ${req.body.vendor_email}` })
+        }
+
+        const vendorData = {
+          vendorname: vendor.name,
+          email: vendor.email,
+          isVendor: true
+        }
+
+        const token = jwt.sign(
+          vendorData,
+          'secret', // TODO SECRET MORE SECRET PLEASE
+          {
+            expiresIn: '1h'
+          }
+        )
+
+        return res.json({
+          token: token,
+          ...vendorData
         })
-        .then(vendor => {
-            if (!vendor) {
-                return res.json({
-                    error: 'wrong email'
-                })
-            }
-
-            bcrypt.compare(req.body.vendor_password, vendor.password, (err, result) => {
-                if (!result) {
-                    return res.json({
-                        error: `wrong password for ${req.body.vendor_email}`
-                    })
-                }
-
-                const vendorData = {
-                    vendorname: vendor.name,
-                    email: vendor.email
-                }
-
-                const token = jwt.sign(
-                    vendorData,
-                    'secret', // TODO SECRET MORE SECRET PLEASE
-                    {
-                        expiresIn: '1h'
-                    }
-                )
-
-                return res.json({
-                    token: token,
-                    ...vendorData
-                })
-            })
-        })
-        .catch(err => handdleError(err, res))
+      })
+    })
+    .catch(err => handdleError(err, res))
 }
 
-function handdleError(err, res) {
-    return res.status(400).json(err)
+function handdleError (err, res) {
+  return res.status(400).json(err)
 }

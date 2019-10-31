@@ -1,19 +1,19 @@
 const router = require('express').Router()
 const {
-    me,
-    authenticated
-} = require('../services/authenticate');
+  me,
+  authenticated
+} = require('../services/authenticate')
 
 const {
-    getAllVendors,
-    getVendorById,
-    deleteVendorById,
-    updateVendor,
-    getVendorsPostal
+  getAllVendors,
+  getVendorById,
+  deleteVendorById,
+  updateVendor,
+  getVendorsPostalCategories
 } = require('../controlers/vendors.controller')
 
 router.get('/', getAllVendors)
-router.get('/postal/:postal', getVendorsPostal)
+router.get('/category/:postal', getVendorsPostalCategories)
 router.get('/:id', getVendorById)
 router.delete('/:id', authenticated, me, deleteVendorById)
 router.put('/:id', authenticated, me, updateVendor)

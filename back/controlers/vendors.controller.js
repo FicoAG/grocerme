@@ -1,74 +1,69 @@
 const VendorModel = require('../models/vendors.model')
 
 module.exports = {
-    getAllVendors,
-    getVendorById,
-    deleteVendorById,
-    updateVendor,
-    getVendorsPostal
+  getAllVendors,
+  getVendorById,
+  deleteVendorById,
+  updateVendor,
+  getVendorsPostalCategories
 }
 
-function getAllVendors(req, res) {
-    VendorModel
-        .find()
-        .then(response => res.json(response))
-        .catch((err) => handdleError(err, res))
+function getAllVendors (req, res) {
+  VendorModel
+    .find()
+    .then(response => res.json(response))
+    .catch((err) => handdleError(err, res))
 }
 
-function getVendorById(req, res) {
-    VendorModel
-        .findById(req.params.id)
-        .then(response => res.json(response))
-        .catch((err) => handdleError(err, res))
+function getVendorById (req, res) {
+  VendorModel
+    .findById(req.params.id)
+    .then(response => res.json(response))
+    .catch((err) => handdleError(err, res))
 }
 
-function deleteVendorById(req, res) {
-    VendorModel
-        .remove({
-            _id: req.params.id
-        })
-        .then(response => res.json(response))
-        .catch(err => handdleError(err, res))
+function deleteVendorById (req, res) {
+  VendorModel
+    .remove({
+      _id: req.params.id
+    })
+    .then(response => res.json(response))
+    .catch(err => handdleError(err, res))
 }
 
-function updateVendor(req, res) {
-    VendorModel
-        .findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        })
-        .then(response => res.json(response))
-        .catch((err) => handdleError(err, res))
+function updateVendor (req, res) {
+  VendorModel
+    .findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    })
+    .then(response => res.json(response))
+    .catch((err) => handdleError(err, res))
 }
 
-function getVendorsPostal(req, res) {
-    VendorModel
-        .find()
-        .then(data => {
-            const filtrados = data.filter(v => {
-                return v.mon.zone.includes(req.params.postal) ||
-                    v.tue.zone.includes(req.params.postal) ||
-                    v.wed.zone.includes(req.params.postal) ||
-                    v.thu.zone.includes(req.params.postal) ||
-                    v.fri.zone.includes(req.params.postal) ||
-                    v.sat.zone.includes(req.params.postal) ||
-                    v.sun.zone.includes(req.params.postal)
-            });
-            return filtrados;
-        })
-        .then(filtrados => {
-            let results = {};
-            filtrados.forEach(filtrado => {
-                if (!results[filtrado.category]){
-                    results[filtrado.category] = [];
-                }
-                results[filtrado.category].push(filtrado);
-            })
-            return res.json(results)
-        })
-        .catch((err) => handdleError(err, res))
+function getVendorsPostalCategories (req, res) {
+  console.log(req.params)
+  VendorModel
+    .find({ $or: [
+      { 'mon.zone': { $elemMatch: { $eq: req.params.postal } } },
+      { 'tue.zone': { $elemMatch: { $eq: req.params.postal } } },
+      { 'wed.zone': { $elemMatch: { $eq: req.params.postal } } },
+      { 'thu.zone': { $elemMatch: { $eq: req.params.postal } } },
+      { 'fri.zone': { $elemMatch: { $eq: req.params.postal } } },
+      { 'sat.zone': { $elemMatch: { $eq: req.params.postal } } },
+      { 'sun.zone': { $elemMatch: { $eq: req.params.postal } } }
+    ]}, {
+      category: 1, brand: 1, name: 1
+    })
+    .then(data => {
+      const categories = []
+      data.forEach(c => categories.push(c.category))
+      const cats = categories.filter((cat, index) => categories.indexOf(cat) === index).sort()
+      return res.json(cats)
+    })
+    .catch((err) => handdleError(err, res))
 }
 
-function handdleError(err, res) {
-    return res.status(400).json(err)
+function handdleError (err, res) {
+  return res.status(400).json(err)
 }
