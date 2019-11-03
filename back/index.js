@@ -23,7 +23,7 @@ app.use(express.json())
 
 // NONGOOSE
 mongoose.connect(
-  config.mongoURL + config.mongoDBName, 
+  config.mongoURL + config.mongoDBName,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
   err => { if (err) { throw new Error(err) } console.info('💾  Mongoose is connected') }
 )
@@ -39,7 +39,7 @@ app.listen(config.port, (err) => {
     throw new Error(err)
   }
   console.info('\n\n' + '>'.repeat(40))
-  console.info('💻  Reboot Server Live')
+  console.info('💻  Grocerme Server Live')
   console.info(`📡  PORT: http://localhost:${config.port}`)
   console.info('>'.repeat(40) + '\n\n')
 })

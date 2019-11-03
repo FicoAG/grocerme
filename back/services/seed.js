@@ -185,9 +185,11 @@ var firstNames = [
   'ARIADNA'
 ]
 
-var password = '12345'
-var category = ['frosted', 'bakery', 'fruits & vegetables', 'water']
-var brand = ['firgas', 'bofrost', 'agua de teror', 'frutas canarias', 'panadería pulido', 'colomar']
+var password = '$2b$10$XdUkntu2p.QqZm1M1ZJZm.SkAE0.zDfz4wtIikg378wTQzpHgIwIm'
+// var category = ['frosted', 'bakery', 'fruits & vegetables', 'water']
+var brandCat = [['Aguas de Teror', 'Water'], ['Aguas de Firgas', 'Water'], ['Aguas de Guayadeque', 'Water'], ['Bofrost', 'Forsted'], ['Bofrost', 'Forsted'], ['Frutas de Atlántico', 'Fruits'], ['Frutería Mercado Central', 'Fruits'], ['Panadería Pulido', 'Bakery'], ['Pastelería Colomar', 'Bakery']]
+var calle = ['Calle', 'Avenida', 'Carretera', 'Paseo', 'Plaza']
+var calle2 = ['Dr.', 'Dra.', 'Presidente', 'Escultor', 'Escultora', 'General', 'Secretario', 'Secretaria', 'Poeta', 'Pintor']
 var zone = [
   '35001',
   '35002',
@@ -353,20 +355,20 @@ var vendors = []
 do {
   t += 1
   lastNames = lastNames.sort(function () { return 0.5 - Math.random() })
-  firstNames = firstNames.sort(function ()  {return 0.5 - Math.random() })
-  category = category.sort(function () { return 0.5 - Math.random() })
-  brand = brand.sort(function () { return 0.5 - Math.random() })
+  firstNames = firstNames.sort(function () { return 0.5 - Math.random() })
+  // category = category.sort(function () { return 0.5 - Math.random() })
+  brandCat = brandCat.sort(function () { return 0.5 - Math.random() })
   zone = zone.sort(function () { return 0.5 - Math.random() })
 
   vendors.push(
     {
       // _id:{},
-      name: firstNames[0] + ' ' + lastNames[0],
-      email: firstNames[0] + '.' + lastNames[0] + '@gmail.com',
+      name: firstNames[0] + ' ' + lastNames[3],
+      email: firstNames[0] + '.' + lastNames[3] + '@gmail.com',
       password: password,
-      category: category[0],
+      category: brandCat[0][1],
 
-      brand: brand[0],
+      brand: brandCat[0][0],
       mon: {
         zone: [zone[0], zone[1]],
         usersSubscribed: [],
@@ -401,13 +403,14 @@ do {
         zone: [zone[12], zone[13]],
         usersSubscribed: [],
         orders: []
-      }
+      },
+      users: []
     })
 } while (t < 1000)
 
 const data = JSON.stringify(vendors)
 fs.writeFileSync('vendors.json', data)
-// mongoimport --db reboot --collection vendors --file vendors.json --jsonArray
+// mongoimport --db grocerme --collection vendors --file vendors.json --jsonArray
 
 var users = []
 // users seed
@@ -416,12 +419,13 @@ do {
   t += 1
   lastNames = lastNames.sort(function () { return 0.5 - Math.random() })
   firstNames = firstNames.sort(function () { return 0.5 - Math.random() })
-  category = category.sort(function () { return 0.5 - Math.random() })
+  calle = calle.sort(function () { return 0.5 - Math.random() })
+  calle2 = calle2.sort(function () { return 0.5 - Math.random() })
   users.push({
-    name: firstNames[0] + ' ' + lastNames[0],
-    email: firstNames[0] + '.' + lastNames[0] + '@me.com',
+    name: firstNames[0] + ' ' + lastNames[5],
+    email: firstNames[0] + '.' + lastNames[5] + '@me.com',
     password: password,
-    address: 'calle ' + firstNames[7] + ' ' + lastNames[7],
+    address: calle[2] + ' del ' + calle2[5] + ' ' + lastNames[7],
     zipcode: zone[0],
     vendors: []
   })
@@ -433,4 +437,4 @@ console.log(users.length)
 
 const data2 = JSON.stringify(users)
 fs.writeFileSync('users.json', data2)
-// mongoimport --db reboot --collection users --file users.json --jsonArray
+// mongoimport --db grocerme --collection users --file users.json --jsonArray

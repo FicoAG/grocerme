@@ -41,7 +41,7 @@ $ cp .env.example .env
 And customize the sample params to your needs
 
 - mongoURL: "mongodb://localhost/",
-- mongoDBName: 'reboot',
+- mongoDBName: 'grocerme',
 - apiKeys : "fakeapikey",
 - port : 5000
 
