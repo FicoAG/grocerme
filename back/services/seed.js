@@ -187,7 +187,7 @@ var firstNames = [
 
 var password = '$2b$10$XdUkntu2p.QqZm1M1ZJZm.SkAE0.zDfz4wtIikg378wTQzpHgIwIm'
 // var category = ['frosted', 'bakery', 'fruits & vegetables', 'water']
-var brandCat = [['Aguas de Teror', 'Water'], ['Aguas de Firgas', 'Water'], ['Aguas de Guayadeque', 'Water'], ['Bofrost', 'Forsted'], ['Bofrost', 'Forsted'], ['Frutas de Atlántico', 'Fruits'], ['Frutería Mercado Central', 'Fruits'], ['Panadería Pulido', 'Bakery'], ['Pastelería Colomar', 'Bakery']]
+var brandCat = [['Aguas de Teror', 'Water'], ['Aguas de Firgas', 'Water'], ['Aguas de Guayadeque', 'Water'], ['Bofrost', 'Frosted'], ['Bofrost', 'Frosted'], ['Frutas de Atlántico', 'Fruits'], ['Frutería Mercado Central', 'Fruits'], ['Panadería Pulido', 'Bakery'], ['Pastelería Colomar', 'Bakery']]
 var calle = ['Calle', 'Avenida', 'Carretera', 'Paseo', 'Plaza']
 var calle2 = ['Dr.', 'Dra.', 'Presidente', 'Escultor', 'Escultora', 'General', 'Secretario', 'Secretaria', 'Poeta', 'Pintor']
 var zone = [

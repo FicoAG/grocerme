@@ -17,11 +17,12 @@ function signupVendor (req, res) {
 
   VendorModel
     .create(vendorBody)
-    .then(() => {
+    .then((newVendor) => {
       const vendorData = {
         vendorname: req.body.vendor_name,
         email: req.body.vendor_email,
-        isVendor: true
+        isVendor: true,
+        _id : newVendor._id
       }
 
       const token = jwt.sign(
@@ -55,14 +56,15 @@ function loginVendor (req, res) {
         const vendorData = {
           vendorname: vendor.name,
           email: vendor.email,
-          isVendor: true
+          isVendor: true,
+          _id: vendor._id
         }
 
         const token = jwt.sign(
           vendorData,
           'secret', // TODO SECRET MORE SECRET PLEASE
           {
-            expiresIn: '1h'
+            expiresIn: '1w'
           }
         )
 

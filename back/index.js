@@ -19,8 +19,6 @@ app.use(cors())
 app.use(morgan('combined'))
 app.use(express.json())
 
-
-
 // NONGOOSE
 mongoose.connect(
   config.mongoURL + config.mongoDBName,
@@ -31,7 +29,6 @@ mongoose.connect(
 // ROUTING
 const apiRouter = require('./routes')
 app.use('/api',  apiRouter)
-
 
 // Init server
 app.listen(config.port, (err) => {

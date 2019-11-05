@@ -1,0 +1,116 @@
+body {
+ width: 100%;
+}
+
+#navbar{
+  margin: 10px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#navbar-logo{
+  height: 23px;
+}
+
+#login{
+  color: rgb(197, 178, 3);
+  text-decoration: none; /* no underline */
+}
+
+#hero-banner{
+  position: relative;
+  height: 40vh;
+  width: 100%;
+  background-color: #ed240e;
+  margin: 0 auto;
+}
+
+#hero-inner{
+  font-family: 'Fredoka One', cursive;
+  color: white;
+  font-size: 36px;
+  position: absolute;
+  margin-left: 15%;
+  margin-top: 10vh;
+  display: flex;
+}
+
+#slogan {
+  font-size: 30%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#banner-logo{
+  height: 110px;
+}
+
+hero-inner-low{
+  align-items: center;
+}
+
+#vendor-finder-btn{
+  background-color: #2B303A;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 8px;
+  display:inline-block;
+  cursor:pointer;
+  font-size:17px;
+  padding: 1px, 20px, 1px, 20px;
+  font-size: 40%;
+  height: 25px;
+  border: none;
+}
+.myButton:hover {
+	background-color:#a6ff00;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+#post-code{
+  border-radius: 8px;
+  border: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 50%;
+}
+::placeholder {
+  color: rgba(164, 164, 164, 0.454);
+  opacity: 1;
+  font-size: 16px;
+  vertical-align: center;
+  text-align: justify;
+}
+
+#display-categories{
+  height: 60vh;
+  margin: 1em 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+}
+
+#display-categories a {
+  color: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: none;
+
+}
+
+.cat-div{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  padding-top: 40px;
+  font-size: 1.3em;
+  border-radius: 5px;
+  box-shadow: black;
+}
+
+footer{
+  background-color: black;
+  height: 100px;
+}

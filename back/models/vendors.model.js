@@ -11,7 +11,8 @@ const vendorSchema = new mongoose.Schema({
     required: [true, 'Email is required'],
     validate: {
       validator (value) {
-        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value)
+        return true ;
+        // /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value)
       }
     },
     unique: [true, 'This is email is registered']
@@ -22,7 +23,7 @@ const vendorSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['frosted', 'bakery', 'fruits & vegetables', 'water']
+    enum: ['Frosted', 'Bakery', 'Fruits', 'Water']
   },
   brand: {
     type: String
