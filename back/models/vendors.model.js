@@ -11,7 +11,7 @@ const vendorSchema = new mongoose.Schema({
     required: [true, 'Email is required'],
     validate: {
       validator (value) {
-        return true ;
+        return true
         // /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value)
       }
     },
@@ -28,13 +28,83 @@ const vendorSchema = new mongoose.Schema({
   brand: {
     type: String
   },
-  mon: { daySchema },
-  tue: { daySchema },
-  wed: { daySchema },
-  thu: { daySchema },
-  fri: { daySchema },
-  sat: { daySchema },
-  sun: { daySchema },
+  mon: {
+    zone: [{ type: String }],
+    usersSubscribed: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    }],
+    orders: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'order'
+    }]
+  },
+  tue: {
+    zone: [{ type: String }],
+    usersSubscribed: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    }],
+    orders: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'order'
+    }]
+  },
+  wed: {
+    zone: [{ type: String }],
+    usersSubscribed: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    }],
+    orders: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'order'
+    }]
+  },
+  thu: {
+    zone: [{ type: String }],
+    usersSubscribed: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    }],
+    orders: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'order'
+    }]
+  },
+  fri: {
+    zone: [{ type: String }],
+    usersSubscribed: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    }],
+    orders: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'order'
+    }]
+  },
+  sat: {
+    zone: [{ type: String }],
+    usersSubscribed: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    }],
+    orders: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'order'
+    }]
+  },
+  sun: {
+    zone: [{ type: String }],
+    usersSubscribed: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    }],
+    orders: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'order'
+    }]
+  },
 
   createdAt: {
     type: Date,

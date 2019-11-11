@@ -17,8 +17,7 @@ function signupUser (req, res) {
   UserModel
     .create(userBody)
     .then((newUser) => {
-      const userData = { username: req.body.user_name, email: req.body.user_email, _id: newUser._id }
-
+      const userData = { username: req.body.user_name, email: req.body.user_email, _id: newUser._id, zipcode: newUser.zipcode }
       const token = jwt.sign(
         userData,
         'secret', // TODO SECRET MORE SECRET PLEASE
@@ -41,13 +40,14 @@ function loginUser (req, res) {
       bcrypt.compare(req.body.user_password, user.password, (err, result) => {
         if (!result) { return res.status(500).json({ error: `wrong password for ${req.body.user_email}` }) }
         if (err) { return res.status(500).json({ error: `error ${err}` }) }
-
-        const userData = { username: user.name, email: user.email, _id: user._id }
+        console.log(user.zipcode)
+        console.log("logged")
+        const userData = { username: user.name, email: user.email, _id: user._id, zipcode: user.zipcode }
 
         const token = jwt.sign(
           userData,
           'secret', // TODO SECRET MORE SECRET PLEASE
-          { expiresIn: '1h' }
+          { expiresIn: '1w' }
         )
 
         return res.json({ token: token, ...userData })

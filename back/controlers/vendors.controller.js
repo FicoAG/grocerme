@@ -1,6 +1,5 @@
 const VendorModel = require('../models/vendors.model')
 
-
 module.exports = {
   getAllVendors,
   getVendorById,
@@ -14,22 +13,39 @@ module.exports = {
 
 function getAllVendors (req, res) {
   console.log(req.query)
+  const { postal, category } = req.query
+  if (!postal && !category) {
+    getAllVendorsFromDB()
+      .then(vendors => {
+        res.json(vendors)
 
-  VendorModel
+      })
+  } else {
+    getVendorsFilterdByPostalAndCategoryFromDB(postal, category)
+      .then(result => result.sort((a, b) => a.brand.localeCompare(b.brand)))
+      .then(vendors => { res.json(vendors) })
+      .catch((err) => handdleError(err, res))
+  }
+}
+
+function getVendorsFilterdByPostalAndCategoryFromDB (postal, category) {
+  return VendorModel
     .find({
       $or: [
-        { $and: [{ 'mon.zone': { $elemMatch: { $eq: req.query.postal } } }, { category: { $eq: req.query.category } }] },
-        { $and: [{ 'tue.zone': { $elemMatch: { $eq: req.query.postal } } }, { category: { $eq: req.query.category } }] },
-        { $and: [{ 'wed.zone': { $elemMatch: { $eq: req.query.postal } } }, { category: { $eq: req.query.category } }] },
-        { $and: [{ 'thu.zone': { $elemMatch: { $eq: req.query.postal } } }, { category: { $eq: req.query.category } }] },
-        { $and: [{ 'fri.zone': { $elemMatch: { $eq: req.query.postal } } }, { category: { $eq: req.query.category } }] },
-        { $and: [{ 'sat.zone': { $elemMatch: { $eq: req.query.postal } } }, { category: { $eq: req.query.category } }] },
-        { $and: [{ 'sun.zone': { $elemMatch: { $eq: req.query.postal } } }, { category: { $eq: req.query.category } }] }
+        { $and: [{ 'mon.zone': { $elemMatch: { $eq: postal } } }, { category: { $eq: category } }] },
+        { $and: [{ 'tue.zone': { $elemMatch: { $eq: postal } } }, { category: { $eq: category } }] },
+        { $and: [{ 'wed.zone': { $elemMatch: { $eq: postal } } }, { category: { $eq: category } }] },
+        { $and: [{ 'thu.zone': { $elemMatch: { $eq: postal } } }, { category: { $eq: category } }] },
+        { $and: [{ 'fri.zone': { $elemMatch: { $eq: postal } } }, { category: { $eq: category } }] },
+        { $and: [{ 'sat.zone': { $elemMatch: { $eq: postal } } }, { category: { $eq: category } }] },
+        { $and: [{ 'sun.zone': { $elemMatch: { $eq: postal } } }, { category: { $eq: category } }] }
       ]
     }, { name: 1, category: 1, brand: 1 })
-    .then(result => result.sort((a, b) => a.brand.localeCompare(b.brand)))
-    .then(vendors => { res.json(vendors) })
-    .catch((err) => handdleError(err, res))
+}
+
+function getAllVendorsFromDB () {
+  return VendorModel
+    .find({}, { name: 1, category: 1, brand: 1 })
 }
 
 function getVendorById (req, res) {
@@ -72,14 +88,13 @@ function follow (req, res) {
   VendorModel
     .findById(req.params.id)
     .then(vendor => {
-      console.log(vendor.get('mon').zone)
-      if (vendor.get('mon').zone.includes(res.locals.user.zipcode)) { vendor.get('mon').usersSubscribed.push(res.locals.user._id) }
-      if (vendor.get('tue').zone.includes(res.locals.user.zipcode)) { vendor.get('tue').usersSubscribed.push(res.locals.user._id) }
-      if (vendor.get('wed').zone.includes(res.locals.user.zipcode)) { vendor.get('wed').usersSubscribed.push(res.locals.user._id) }
-      if (vendor.get('thu').zone.includes(res.locals.user.zipcode)) { vendor.get('thu').usersSubscribed.push(res.locals.user._id) }
-      if (vendor.get('fri').zone.includes(res.locals.user.zipcode)) { vendor.get('fri').usersSubscribed.push(res.locals.user._id) }
-      if (vendor.get('sat').zone.includes(res.locals.user.zipcode)) { vendor.get('sat').usersSubscribed.push(res.locals.user._id) }
-      if (vendor.get('sun').zone.includes(res.locals.user.zipcode)) { vendor.get('sun').usersSubscribed.push(res.locals.user._id) }
+      if (vendor.mon.zone.includes(res.locals.user.zipcode)) { vendor.mon.usersSubscribed.push(res.locals.user._id) }
+      if (vendor.tue.zone.includes(res.locals.user.zipcode)) { vendor.tue.usersSubscribed.push(res.locals.user._id) }
+      if (vendor.wed.zone.includes(res.locals.user.zipcode)) { vendor.wed.usersSubscribed.push(res.locals.user._id) }
+      if (vendor.thu.zone.includes(res.locals.user.zipcode)) { vendor.thu.usersSubscribed.push(res.locals.user._id) }
+      if (vendor.fri.zone.includes(res.locals.user.zipcode)) { vendor.fri.usersSubscribed.push(res.locals.user._id) }
+      if (vendor.sat.zone.includes(res.locals.user.zipcode)) { vendor.sat.usersSubscribed.push(res.locals.user._id) }
+      if (vendor.sun.zone.includes(res.locals.user.zipcode)) { vendor.sun.usersSubscribed.push(res.locals.user._id) }
 
       vendor.save()
         .then(_ => {
@@ -94,13 +109,22 @@ function unfollow (req, res) {
   VendorModel
     .findById(req.params.id)
     .then(vendor => {
-      if (vendor.get('mon').usersSubscribed.includes(res.locals.user._id)) { vendor.get('mon').usersSubscribed = vendor.get('mon').usersSubscribed.filter(user => user !== res.locals.user._id) }
-      if (vendor.get('tue').usersSubscribed.includes(res.locals.user._id)) { vendor.get('tue').usersSubscribed = vendor.get('tue').usersSubscribed.filter(user => user !== res.locals.user._id) }
-      if (vendor.get('wed').usersSubscribed.includes(res.locals.user._id)) { vendor.get('wed').usersSubscribed = vendor.get('wed').usersSubscribed.filter(user => user !== res.locals.user._id) }
-      if (vendor.get('thu').usersSubscribed.includes(res.locals.user._id)) { vendor.get('thu').usersSubscribed = vendor.get('thu').usersSubscribed.filter(user => user !== res.locals.user._id) }
-      if (vendor.get('fri').usersSubscribed.includes(res.locals.user._id)) { vendor.get('fri').usersSubscribed = vendor.get('fri').usersSubscribed.filter(user => user !== res.locals.user._id) }
-      if (vendor.get('sat').usersSubscribed.includes(res.locals.user._id)) { vendor.get('sat').usersSubscribed = vendor.get('sat').usersSubscribed.filter(user => user !== res.locals.user._id) }
-      if (vendor.get('sun').usersSubscribed.includes(res.locals.user._id)) { vendor.get('sun').usersSubscribed = vendor.get('sun').usersSubscribed.filter(user => user !== res.locals.user._id) }
+      console.log(res.locals.user._id)
+      const mon = vendor.mon.usersSubscribed
+      const tue = vendor.tue.usersSubscribed
+      const wed = vendor.wed.usersSubscribed
+      const thu = vendor.thu.usersSubscribed
+      const fri = vendor.fri.usersSubscribed
+      const sat = vendor.sat.usersSubscribed
+      const sun = vendor.sun.usersSubscribed
+      if (mon.includes(res.locals.user._id)) { vendor.mon.usersSubscribed = mon.filter(id => id.toString() !== res.locals.user._id.toString()) }
+      if (tue.includes(res.locals.user._id)) { vendor.tue.usersSubscribed = tue.filter(id => id.toString() !== res.locals.user._id.toString()) }
+      if (wed.includes(res.locals.user._id)) { vendor.wed.usersSubscribed = wed.filter(id => id.toString() !== res.locals.user._id.toString()) }
+      if (thu.includes(res.locals.user._id)) { vendor.thu.usersSubscribed = thu.filter(id => id.toString() !== res.locals.user._id.toString()) }
+      if (fri.includes(res.locals.user._id)) { vendor.fri.usersSubscribed = fri.filter(id => id.toString() !== res.locals.user._id.toString()) }
+      if (sat.includes(res.locals.user._id)) { vendor.sat.usersSubscribed = sat.filter(id => id.toString() !== res.locals.user._id.toString()) }
+      if (sun.includes(res.locals.user._id)) { vendor.sun.usersSubscribed = sun.filter(id => id.toString() !== res.locals.user._id.toString()) }
+      console.log(vendor.sun)
       vendor.save()
         .then(_ => {
           res.json('Ok')

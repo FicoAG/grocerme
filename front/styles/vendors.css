@@ -1,3 +1,38 @@
+#vendors-banner{
+  position: relative;
+  height: 30vh;
+  width: 100%;
+  background-image: url("https://images.pexels.com/photos/890507/pexels-photo-890507.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-color: #ed240e;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-clip: unset;
+  margin: 0 auto;
+}
+
+#vendor-list{
+  margin-left: 05%;
+  margin-right: 30%;
+}
+
+.one-vendor{
+  color:red;
+  display: flex;
+  text-decoration: none;
+  font-size: 1.2rem;
+  height: 24px;
+  margin-left: 20px;
+  padding-top: 20px;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+}
 .vendor-single{
-  color:red
+  text-decoration: none;
+  color:rgb(80, 80, 80);
+  font-size: 1.2rem;
+}
+
+.far{
+  font-size: 20px;
 }

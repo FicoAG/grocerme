@@ -1,6 +1,38 @@
 #gral-info{
   display:flex;
+  height: 280px;
+  width: 100%;
   color: #2B303A;
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
+  padding: 10px;
+  background-color: rgb(212, 212, 212);
+}
+
+.info-div{
+  text-align: center;
+  font-size: 1em;
+  border-radius: 5px;
+  box-shadow: black;
+  width: 100%;
+  text-align: -webkit-center;;
+}
+
+.info-div h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2.9em;
+  padding-top: 3%;
+  color: rgb(80, 80, 80);
+  width: 50%;
+  text-align: center;
+}
+
+
+.info-div p {
+  line-height: 2.5ex;
+  font-size: 1.2em;
+  padding-top: 8px;
+  color: rgb(119, 119, 119);
+  width: 40%;
+  text-align: center;
 }
