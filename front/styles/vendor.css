@@ -1,0 +1,79 @@
+#vendor-banner{
+  position: relative;
+  height: 30vh;
+  width: 100%;
+  background-image: url("https://images.pexels.com/photos/890507/pexels-photo-890507.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-color: #ed240e;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-clip: unset;
+  margin: 0 auto;
+}
+
+#hero-inner-vendor{
+
+  color: white;
+  position: absolute;
+  padding-top: 8%;
+  padding-left: 10%;
+  text-shadow: 5px 5px 10px rgb(0, 0, 0);
+}
+
+#hero-inner-vendor h1{
+  font-size: 3em;
+  font-family: 'Fredoka One', cursive;
+}
+
+#hero-inner-vendor h2{
+  font-size: 1.7em;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#follow-btn{
+  font-family: 'Open Sans', sans-serif;
+  background-color: #3fb6d7;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 8px;
+  display:inline-block;
+  cursor:pointer;
+  font-size:17px;
+  padding: 1px, 20px, 1px, 20px;
+  height: 35px;
+  width: 120px;
+  border: none;
+  margin-left: 5%;
+  margin-top: 20px;
+}
+
+#follow-btn:hover {
+	background-color:#ff0000;
+}
+
+#vendor-list{
+  margin-top: 10px;
+}
+
+#time-table {
+  font-family: 'Open Sans', sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#time-table td, #time-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#time-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#time-table tr:hover {background-color: #ddd;}
+
+#time-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ed240e;
+  color: white;
+}

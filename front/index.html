@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,37 +9,47 @@
   <link rel="stylesheet" href="styles/reset.css">
   <link rel="stylesheet" href="styles/styles.css">
   <link rel=”shortcut icon” type=”image/png” href=”images/favicon.png”/>
+  <script src="https://kit.fontawesome.com/42f2863af8.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:300,400,600,700&display=swap"
     rel="stylesheet">
 </head>
 <body>
-  <div id="navbar">
-    <div><a href="/index.html"><img id="navbar-logo" src="images/textlogo.png" alt="Grocerme logo"></div></a>
-      <div id="login">
-        <a href="/userlogin.html">Users</a>
-        <a href="/vendorlogin.html">Vendors</a>
+  <div id="all-wrap">
+    <div id="navbar">
+      <div><a href="/index.html"><img id="navbar-logo" src="images/textlogo.png" alt="Grocerme logo"></div></a>
+        <div id="login">
+          <a href="/userlogin.html">Users /</a>
+          <a href="/vendorlogin.html">Vendors</a>
+        </div>
+    </div>
+    <div id="hero-banner">
+      <div id="hero-inner">
+        <div id="hero-inner-low">
+            <div>
+              <img id="banner-logo" src="images/squarelogo.png" alt="Grocerme logo">
+            </div>
+            <div>
+              <h1>Grocerme</h1>
+              <p id="slogan">groceries delivered to your door</p>
+              <input type="text" id="post-code" placeholder="Whats your zip code?">
+              <button id="vendor-finder-btn">Search</button>
+            </div>
+        </div>
+       </div>
+    </div>
+    <div id="display-categories" style="display:none"></div>
+    <div id="gral-info">
+      <div class="info-div">
+        <h1>+900 vendors waitng for you</h1>
+        <p>to knock on your dor and delivery fresh products with the best prices right to your door. Checkout all services deliverd stright from producers and factories and stop carring them by your self</p>
       </div>
+    </div>
+    <footer>
+      <div class="foot-div"><p>follow us on <i class="fab fa-twitter-square"></i> <i class="fab fa-facebook-square"></i> <i class="fab fa-instagram"></i></p></div>
+      <div class="foot-div"><p>©2019 Grocerme</p></div>
+      <div class="foot-div"></div>
+    </footer>
   </div>
-  <div id="hero-banner">
-    <div id="hero-inner">
-      <div><img id="banner-logo" src="images/squarelogo.png" alt="Grocerme logo"></div>
-      <div id="hero-inner-low">
-        <h1>Grocerme</h1>
-        <p id="slogan">groceries delivered to your door</p>
-        <input type="text" id="post-code" placeholder="Whats your zip code?">
-        <button id="vendor-finder-btn">Search</button>
-      </div>
-     </div>
-  </div>
-  <div id="display-categories"></div>
-  <div id="gral-info">
-    <div id="info-1">Find the vendors on you area</div>
-    <div id="info-2">Subscribe to your favourite vendors</div>
-    <div id="info-3">Make your orders</div>
-
-  </div>
-  <footer>hello footer</footer>
-
    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
    <script src="scripts/api.js"></script>
   <script src="scripts/index.js"></script>

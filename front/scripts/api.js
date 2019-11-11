@@ -35,6 +35,7 @@ function API() {
           localStorage.setItem("name", response.data.username);
           localStorage.setItem("email", response.data.email);
           localStorage.setItem("userId", response.data._id);
+          localStorage.setItem("zipcode", response.data.zipcode);
           window.location.assign('index.html') //TODO REDIRECCIONAR A COMPLETAR PERFIL
         }
       })

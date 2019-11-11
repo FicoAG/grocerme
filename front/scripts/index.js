@@ -2,6 +2,8 @@ document.getElementById('vendor-finder-btn').addEventListener('click', (event) =
   const postal = document.getElementById("post-code").value;
   api.vendorsCatByZip(postal)
     .then((categories) => {
+      document.getElementById('display-categories').style.display="grid"
+      // document.getElementById('gral-info').style.display = "none"
       let output = document.getElementById('display-categories')
       let html =``
       let img = ""
@@ -12,7 +14,7 @@ document.getElementById('vendor-finder-btn').addEventListener('click', (event) =
         if (cat === "Fruits") { img = images[2] }
         if (cat === "Water"){ img = images[3]}
         html += `<div class="cat-div" style="background-image:url(${img})">`
-        html += `<div><a href="vendors.html?cat=${cat}&postal=${postal}">${cat} </a></div>`
+        html += `<div ><a href="vendors.html?cat=${cat}&postal=${postal}">${cat} </a></div>`
         html += `</div>`
 
       })

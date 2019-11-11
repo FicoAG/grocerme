@@ -2,18 +2,47 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Grocerme - direct home deliveries</title>
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Grocerme - direct home deliveries</title>
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel=”shortcut icon” type=”image/png” href=”images/favicon.png”/> <script
+    src="https://kit.fontawesome.com/42f2863af8.js" crossorigin="anonymous">
+    </script>
+  <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans:300,400,600,700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-  <div id="vendor">
+  <div id="all-wrap">
+      <div id="navbar">
+        <div><a href="/index.html"><img id="navbar-logo" src="images/textlogo.png" alt="Grocerme logo"></a></div>
+        <div id="login">
+          <a href="/userlogin.html">Users /</a>
+          <a href="/vendorlogin.html">Vendors</a>
+        </div>
+      </div>
+        <div id="vendor-banner">
+          <div id="hero-inner-vendor">
+            <div><h1 id="vendor-name"></h></div>
+            <div><h2 id="company"></h2></div>
+          </div>
+        </div>
+    <div id="vendor"></div>
+    <div id="follow-bth"></div>
   </div>
-
+  <footer>
+    <div class="foot-div">
+      <p>follow us on <i class="fab fa-twitter-square"></i> <i class="fab fa-facebook-square"></i> <i
+          class="fab fa-instagram"></i></p>
+    </div>
+    <div class="foot-div">
+      <p>©2019 Grocerme</p>
+    </div>
+    <div class="foot-div"></div>
+  </footer>
   <a href="/index.html">Back</a>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="scripts/api.js"></script>
